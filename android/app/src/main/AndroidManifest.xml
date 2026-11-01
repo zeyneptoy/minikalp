@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Release builds talk to the MiniKalp API. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <!-- Local notifications for reminders / appointments / vaccines. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>

@@ -791,8 +791,9 @@ class _SettingsCard extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'Gerçek telefonda bilgisayarınızın IP adresini girin. '
-              'Örn: http://192.168.1.20:8000',
+              'Geliştirme için yerel sunucu adresi girin. '
+              'Örn: http://192.168.1.20:8000\n'
+              'Boş bırakırsanız varsayılan sunucu kullanılır.',
             ),
             const SizedBox(height: AppSpacing.md),
             TextField(

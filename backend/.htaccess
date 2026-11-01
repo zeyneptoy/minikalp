@@ -1,0 +1,21 @@
+# Web kökü backend/ klasörü olduğunda kullanılır (kök backend/public ise bu
+# dosya hiç okunmaz). Adresler /public olmadan çalışır:
+#   https://alanadi.com/api/...  →  public/index.php
+Options -Indexes
+RewriteEngine On
+
+# Authorization başlığını PHP'ye ilet.
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Let's Encrypt doğrulaması (sertifika alma) olduğu gibi geçsin.
+RewriteRule ^\.well-known/ - [L]
+
+# Şifre, kod ve şema dosyaları dışarıya kapalı.
+RewriteRule ^(config|database|src)(/|$) - [F,L]
+RewriteRule (^|/)\. - [F,L]
+RewriteRule \.(md|sql)$ - [F,L]
+
+# Diğer her şey public/ altına.
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]

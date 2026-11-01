@@ -1,27 +1,24 @@
 # Backend bağlantısı (MinikNot API)
 
-Uygulama artık yerel depolamanın yanında **minikalp_web** Laravel API'sine bağlı
-çalışır. Tüm yazma işlemleri optimistic (anında yerelde) uygulanır ve arka
-planda sunucuya işlenir; aktif bebek değiştiğinde veriler sunucudan çekilir.
+Uygulama yerel depolamanın yanında **MiniKalp API**'sine (saf PHP + PDO +
+MySQL, `backend/` klasörü) bağlı çalışır. Tüm yazma işlemleri optimistic
+(anında yerelde) uygulanır ve arka planda sunucuya işlenir; aktif bebek
+değiştiğinde veriler sunucudan çekilir.
 
-## 1. Backend'i başlat
+## 1. Sunucu adresi
+
+Varsayılan: **`https://minikalp.seydidemir.com/api`**
+(`lib/core/api/api_config.dart` → `productionBaseUrl`).
+
+## 2. Yerel geliştirme
 
 ```bash
-cd ~/minikalp_web
-php artisan serve        # http://127.0.0.1:8000
+cd backend
+php -S 0.0.0.0:8000 -t public public/index.php
 ```
 
-## 2. Uygulamayı çalıştır
-
-```bash
-cd ~/Desktop/minikalp
-flutter run
-```
-
-### Sunucu adresi
-`lib/core/api/api_config.dart` varsayılanı `http://127.0.0.1:8000/api`
-(iOS Simulator / masaüstü / web için). Diğer durumlarda adresi çalışırken
-geçebilirsiniz:
+Uygulamayı yerel sunucuya yönlendirmek için adresi çalışırken geçin (ya da
+Profil → Ayarlar → Sunucu adresi; boş kaydedilirse varsayılana döner):
 
 ```bash
 # Android emülatör (host loopback)
@@ -33,7 +30,8 @@ flutter run --dart-define=API_BASE_URL=http://192.168.1.20:8000/api
 
 > Android debug build'inde düz HTTP'ye izin verildi
 > (`android/app/src/debug/AndroidManifest.xml` → `usesCleartextTraffic`).
-> iOS, localhost'a varsayılan olarak izin verir.
+> iOS, localhost'a varsayılan olarak izin verir. Release build'ler HTTPS
+> kullanır; `INTERNET` izni ana manifest'tedir.
 
 ## 3. Kimlik doğrulama (otomatik)
 

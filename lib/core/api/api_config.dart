@@ -5,30 +5,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Resolution order for the base URL:
 ///   1. A value set in-app (Profil → Ayarlar → Sunucu adresi), persisted.
 ///   2. A build-time --dart-define=API_BASE_URL=...
-///   3. A sensible local-development default.
+///   3. The production server.
 ///
-/// The in-app option matters for real devices, where `127.0.0.1` points at the
-/// phone itself — there you enter your computer's LAN IP (e.g.
-/// http://192.168.1.20:8000/api) so the app can reach the Laravel server.
+/// The in-app option and the dart-define are for development, e.g. pointing a
+/// device at a local server (http://192.168.1.20:8000/api).
 class ApiConfig {
   ApiConfig._();
 
+  static const String productionBaseUrl = 'https://minikalp.seydidemir.com/api';
+
   static const String _override =
       String.fromEnvironment('API_BASE_URL', defaultValue: '');
-
-  static const bool _androidEmulator = false;
 
   static const String _prefKey = 'api_base_url';
 
   /// Set at runtime from saved preferences or the settings screen.
   static String? runtimeBaseUrl;
 
-  static String get defaultBaseUrl {
-    if (_override.isNotEmpty) return _override;
-    return _androidEmulator
-        ? 'http://10.0.2.2:8000/api'
-        : 'http://127.0.0.1:8000/api';
-  }
+  static String get defaultBaseUrl =>
+      _override.isNotEmpty ? _override : productionBaseUrl;
 
   static String get baseUrl {
     final rt = runtimeBaseUrl;
