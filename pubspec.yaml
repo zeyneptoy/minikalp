@@ -1,0 +1,66 @@
+name: minikalp
+description: "MinikNot - a calm, mother-friendly baby tracking app (UI prototype)."
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Turkish (and fallback) Material/Cupertino localizations.
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # State management
+  flutter_riverpod: ^2.6.1
+
+  # Navigation
+  go_router: ^14.6.2
+
+  # Typography
+  google_fonts: ^6.2.1
+
+  # Charts (analytics / growth)
+  fl_chart: ^0.69.2
+
+  # Photo picking for the baby avatar
+  image_picker: ^1.1.2
+
+  # Date / number formatting (Turkish locale). Pinned by flutter_localizations.
+  intl: ^0.20.2
+
+  # Micro animations
+  flutter_animate: ^4.5.0
+
+  # Local persistence for simple settings (theme, gender, etc.)
+  shared_preferences: ^2.3.3
+
+  # HTTP client for the MiniKalp backend API.
+  http: ^1.2.2
+
+  # Open the Play Store / App Store from the force-update screen.
+  url_launcher: ^6.3.1
+
+  # Read the installed app version for the force-update check.
+  package_info_plus: ^8.1.2
+
+  # Local notifications for medicine reminders, appointments and vaccines.
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.9.4
+  flutter_timezone: ^3.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
